@@ -70,7 +70,7 @@ int intersect_integ(void)
   double tMax_x, tMax_y, tMax_z, tMin_all; 
   double* dist_trav=NULL, *PotDot=NULL;
 
-  printf("Let's find the intersections\n");
+
 
   for(m=0; m<GV.NRays; m++)
     {
@@ -89,6 +89,9 @@ int intersect_integ(void)
 	  PotDot[p]    = 0.0;
 	}//for p
 
+      printf("Let's find the intersections\n");
+
+      rad_max = 0.0;
       do 
 	{
 	  x0 = xf;
@@ -126,6 +129,9 @@ int intersect_integ(void)
 	      if (tMax_z < tMin_all)
 		tMin_all = tMax_z;
 	    }//else
+
+	  if(p<5)
+	    printf("For m=%d, p=%d, tMin_all=%lf\n", m, p, tMin_all);
 	  
 	  xf = ray[m].vec_ini[X] + tMin_all * (ray[m].vec_end[X] - ray[m].vec_ini[X]);
 	  yf = ray[m].vec_ini[Y] + tMin_all * (ray[m].vec_end[Y] - ray[m].vec_ini[Y]);
