@@ -96,9 +96,7 @@ int intersect_integ(void)
 	{
 	  x0 = xf;
 	  y0 = yf;
-	  z0 = zf;
-
-	  printf("x0=%10.5lf\n", x0);
+	  z0 = zf;	 
 
 	  /*+++++ Computing parameter t in equation \vec[u] + t * \vec[v] = vec_end +++++*/
 	  if( (ray[m].vec_end[X] - ray[m].vec_ini[X]) > 0.0 || (ray[m].vec_end[X] - ray[m].vec_ini[X]) < 0.0 )
@@ -116,11 +114,10 @@ int intersect_integ(void)
 	  else
 	    tMax_z = ray[m].rad;
 
-	  printf("p=%d\n", p);
 
 	  if(p<5)
 	    {
-	      printf("tx, ty, tz = %10.5lf, %10.5lf, %10.5lf", tMax_x, tMax_y, tMax_z);
+	      printf("tx, ty, tz = %10.5lf, %10.5lf, %10.5lf\n", tMax_x, tMax_y, tMax_z);
 	    }//if
 	  
 	  /*+++++ Finding the minimum of the 3 t parameters +++++*/
@@ -165,7 +162,7 @@ int intersect_integ(void)
 
 	  if(p<5)
 	    {
-	      printf("-------------------------------------------------------------------------------");
+	      printf("-------------------------------------------------------------------------------\n");
 	      printf("Intersection at (x,y,z)=(%10.5lf,%10.5lf,%10.5lf) at cell n=%d\n", xf, yf, zf, n);
 	      printf("Distance traveled: %10.5lf and PotDot = %10.5lf\n", dist_trav[p-1], PotDot[p-1]);
 	    }//if
