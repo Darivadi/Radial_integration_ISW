@@ -70,6 +70,8 @@ int intersect_integ(void)
   double tMax_x, tMax_y, tMax_z, tMin_all; 
   double* dist_trav=NULL, *PotDot=NULL;
 
+  printf("Let's find the intersections\n");
+
   for(m=0; m<GV.NRays; m++)
     {
       p = 1;
@@ -78,6 +80,8 @@ int intersect_integ(void)
 
       dist_trav = (double *) calloc((size_t) (GV.NCELLS/2), sizeof(double) );
       PotDot    = (double *) calloc((size_t) (GV.NCELLS/2), sizeof(double) );
+      
+      printf("Memory allocated\n");
       
       for(p=0; p<(GV.NCELLS/2); p++)
 	{
