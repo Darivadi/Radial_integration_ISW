@@ -98,6 +98,8 @@ int intersect_integ(void)
 	  y0 = yf;
 	  z0 = zf;
 
+	  printf("x0=%10.5lf", x0);
+
 	  /*+++++ Computing parameter t in equation \vec[u] + t * \vec[v] = vec_end +++++*/
 	  if( (ray[m].vec_end[X] - ray[m].vec_ini[X]) > 0.0 || (ray[m].vec_end[X] - ray[m].vec_ini[X]) < 0.0 )
 	    tMax_x = fabs( (p*GV.CellSize - ray[m].vec_ini[X]) / (ray[m].vec_end[X] - ray[m].vec_ini[X]) );
@@ -105,14 +107,17 @@ int intersect_integ(void)
 	    tMax_x = ray[m].rad;
 	  
 	  if( (ray[m].vec_end[Y] - ray[m].vec_ini[Y]) > 0.0 || (ray[m].vec_end[Y] - ray[m].vec_ini[Y]) < 0.0 )
-	    tMax_x = fabs( (p*GV.CellSize - ray[m].vec_ini[Y]) / (ray[m].vec_end[Y] - ray[m].vec_ini[Y]) );
+	    tMax_y = fabs( (p*GV.CellSize - ray[m].vec_ini[Y]) / (ray[m].vec_end[Y] - ray[m].vec_ini[Y]) );
 	  else
-	    tMax_x = ray[m].rad;
+	    tMax_y = ray[m].rad;
 	  
 	  if( (ray[m].vec_end[Z] - ray[m].vec_ini[Z]) > 0.0 || (ray[m].vec_end[Z] - ray[m].vec_ini[Z]) < 0.0 )
-	    tMax_x = fabs( (p*GV.CellSize - ray[m].vec_ini[Z]) / (ray[m].vec_end[Z] - ray[m].vec_ini[Z]) );
+	    tMax_z = fabs( (p*GV.CellSize - ray[m].vec_ini[Z]) / (ray[m].vec_end[Z] - ray[m].vec_ini[Z]) );
 	  else
-	    tMax_x = ray[m].rad;
+	    tMax_z = ray[m].rad;
+
+	  if(p<5)
+	    printf("tx, ty, tz = %10.5lf, %10.5lf, %10.5lf", tMax_x, tMax_y, tMax_z);
 	  
 	  /*+++++ Finding the minimum of the 3 t parameters +++++*/
 	  if (tMax_x < tMax_y)
