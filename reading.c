@@ -51,9 +51,9 @@ int read_parameters( char filename[] )
   nread = fscanf(file, "%s", GV.FILENAME);
   nread = fscanf(file, "%d", &GV.NRays);
 
-  printf("Number of cells %10d", GV.NCELLS);
-  printf("Number of rays %10d", GV.NRays);  
-  printf("Data file at %s", GV.FILENAME);
+  printf("Number of cells %10d\n", GV.NCELLS);
+  printf("Number of rays %10d\n", GV.NRays);  
+  printf("Data file at %s\n", GV.FILENAME);
   
   fclose( file );
   
@@ -134,3 +134,38 @@ int read_binary(void)
   
   return 0;
 }//read_binary
+
+
+/**************************************************************************************************** 
+NAME: write_binary
+FUNCTION: writes file in binary format
+INPUT: None
+RETURN: 0 
+****************************************************************************************************/
+int write_binary(void)
+{
+  FILE *outFile=NULL;
+  int m, i, j, k;
+  
+  pf = fopen("./../../Processed_data/ISW_radial_app2.bin", "w");
+  
+  fwrite(&GV.BoxSize,  sizeof(double), 1, outFile);  // Box Size                                                     
+  fwrite(&GV.Omega_M0, sizeof(double), 1, outFile);  // Matter density parameter                                     
+  fwrite(&GV.Omega_L0, sizeof(double), 1, outFile);  // Cosmological constant density parameter                      
+  fwrite(&GV.z_RS,     sizeof(double), 1, outFile);  // Redshift                                                     
+  fwrite(&GV.H0,       sizeof(double), 1, outFile);  // Hubble parameter                                             
+  fwrite(&GV.NCELLS,   sizeof(int),    1, outFile);  // Number of cells per axis
+  fwrite(&GV.NRays,    sizeof(int),    1, outFile);  // Number of radial rays
+  
+  for(m=0; m<GV.NRays; m++)
+    {
+      fwrite(&(ray[m].rad),      sizeof(double), 1, outFile);
+      fwrite(&(ray[m].theta),    sizeof(double), 1, outFile);
+      fwrite(&(ray[m].phi),      sizeof(double), 1, outFile);
+      fwrite(&(ray[m].ISW_temp), sizeof(double), 1, outFile);
+    }//for m                                                                                                    
+
+  fclose(outFile);
+
+
+}//write_binary

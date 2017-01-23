@@ -74,7 +74,13 @@ int main(int argc, char *argv[])
    
   /*+++++ Finding intersections and integrating +++++*/
   intersect_integ();
+  printf("--------------------------------------------------------------------------------------\n");
 
+  /*+++++ Saving data file +++++*/
+  printf("Saving data file");
+  printf("--------------------------------------------------------------------------------------\n");
+  write_binary();
+  
   
   printf("Code finished successfully\n");
   printf("See ya, Mr. Barbarian\n");

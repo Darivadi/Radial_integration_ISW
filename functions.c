@@ -117,6 +117,7 @@ int intersect_integ(void)
 
 	  if(p<5)
 	    {
+	      printf("-------------------------------------------------------------------------------\n");
 	      printf("tx, ty, tz = %10.5lf, %10.5lf, %10.5lf\n", tMax_x, tMax_y, tMax_z);
 	    }//if
 	  
@@ -141,7 +142,7 @@ int intersect_integ(void)
 	    }//else
 
 	  if(p<5)
-	    {
+	    {	      
 	      printf("For m=%d, p=%d, tMin_all=%lf\n", m, p, tMin_all);
 	    }//if
 	  
@@ -161,8 +162,7 @@ int intersect_integ(void)
 	  PotDot[p-1] = gp[n].potDot_r;
 
 	  if(p<5)
-	    {
-	      printf("-------------------------------------------------------------------------------\n");
+	    {	      
 	      printf("Intersection at (x,y,z)=(%10.5lf,%10.5lf,%10.5lf) at cell n=%d\n", xf, yf, zf, n);
 	      printf("Distance traveled: %10.5lf and PotDot = %10.5lf\n", dist_trav[p-1], PotDot[p-1]);
 	    }//if
@@ -170,6 +170,11 @@ int intersect_integ(void)
 	  p++;
 	}
       while( rad_max <= ray[m].rad );
+
+      printf("For the last cell:\n");
+      printf("rad_max=%10.5lf\n", rad_max);
+      printf("Intersection at (x,y,z)=(%10.5lf,%10.5lf,%10.5lf) at cell n=%d\n", xf, yf, zf, n);
+      printf("Distance traveled: %10.5lf and PotDot = %10.5lf\n", dist_trav[p-1], PotDot[p-1]);
       
       /*+++++ Computing integral +++++*/
       printf("Computing integral for m=%d\n", m);
