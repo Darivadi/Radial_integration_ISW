@@ -98,7 +98,7 @@ int intersect_integ(void)
 	  y0 = yf;
 	  z0 = zf;
 
-	  printf("x0=%10.5lf", x0);
+	  printf("x0=%10.5lf\n", x0);
 
 	  /*+++++ Computing parameter t in equation \vec[u] + t * \vec[v] = vec_end +++++*/
 	  if( (ray[m].vec_end[X] - ray[m].vec_ini[X]) > 0.0 || (ray[m].vec_end[X] - ray[m].vec_ini[X]) < 0.0 )
@@ -116,8 +116,12 @@ int intersect_integ(void)
 	  else
 	    tMax_z = ray[m].rad;
 
+	  printf("p=%d\n", p);
+
 	  if(p<5)
-	    printf("tx, ty, tz = %10.5lf, %10.5lf, %10.5lf", tMax_x, tMax_y, tMax_z);
+	    {
+	      printf("tx, ty, tz = %10.5lf, %10.5lf, %10.5lf", tMax_x, tMax_y, tMax_z);
+	    }//if
 	  
 	  /*+++++ Finding the minimum of the 3 t parameters +++++*/
 	  if (tMax_x < tMax_y)
@@ -125,18 +129,24 @@ int intersect_integ(void)
 	      tMin_all = tMax_x;
 	      
 	      if (tMax_z < tMin_all)
-		tMin_all = tMax_z;	      
+		{
+		  tMin_all = tMax_z;	      
+		}//if 1
 	    }//if
 	  else
 	    {
 	      tMin_all = tMax_y;
 	      
 	      if (tMax_z < tMin_all)
-		tMin_all = tMax_z;
+		{
+		  tMin_all = tMax_z;
+		}//if 1
 	    }//else
 
 	  if(p<5)
-	    printf("For m=%d, p=%d, tMin_all=%lf\n", m, p, tMin_all);
+	    {
+	      printf("For m=%d, p=%d, tMin_all=%lf\n", m, p, tMin_all);
+	    }//if
 	  
 	  xf = ray[m].vec_ini[X] + tMin_all * (ray[m].vec_end[X] - ray[m].vec_ini[X]);
 	  yf = ray[m].vec_ini[Y] + tMin_all * (ray[m].vec_end[Y] - ray[m].vec_ini[Y]);
