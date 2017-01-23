@@ -73,8 +73,7 @@ int intersect_integ(void)
 
 
   for(m=0; m<GV.NRays; m++)
-    {
-      p = 1;
+    {      
       rad_max = 0.0;
       x0 = y0 = z0 = xf = yf = zf = 0.0;
 
@@ -92,6 +91,7 @@ int intersect_integ(void)
       printf("Let's find the intersections\n");
 
       rad_max = 0.0;
+      p = 1;
       do 
 	{
 	  x0 = xf;
@@ -174,7 +174,8 @@ int intersect_integ(void)
 	}
       while( rad_max <= ray[m].rad );
       
-
+      /*+++++ Computing integral +++++*/
+      printf("Computing integral for m=%d\n", m);
       ray[m].ISW_temp = 0.0;
 	
       for(p=0; p<(GV.NCELLS/2); p++)
