@@ -147,7 +147,7 @@ int write_binary(void)
   FILE *outFile=NULL;
   int m, i, j, k;
   
-  pf = fopen("./../../Processed_data/ISW_radial_app2.bin", "w");
+  outFile = fopen("./../../Processed_data/ISW_radial_app2.bin", "w");
   
   fwrite(&GV.BoxSize,  sizeof(double), 1, outFile);  // Box Size                                                     
   fwrite(&GV.Omega_M0, sizeof(double), 1, outFile);  // Matter density parameter                                     
