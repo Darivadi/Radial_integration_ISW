@@ -93,7 +93,8 @@ int intersect_integ(void)
 
       p = 1;
       
-      printf("Entering to the algorithm of parameter t of line for m=%d with p=%d\n", m, p);
+      if(m%1000==0)
+	printf("Entering to the algorithm of parameter t of line for m=%d with p=%d\n", m, p);
 
       do 
 	{
