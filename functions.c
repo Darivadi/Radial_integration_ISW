@@ -115,7 +115,7 @@ int intersect_integ(void)
 	    tMax_z = ray[m].rad;
 
 
-	  if(p<5)
+	  if( m<2 && p<5 )
 	    {
 	      printf("-------------------------------------------------------------------------------\n");
 	      printf("tx, ty, tz = %10.5lf, %10.5lf, %10.5lf\n", tMax_x, tMax_y, tMax_z);
@@ -141,7 +141,7 @@ int intersect_integ(void)
 		}//if 1
 	    }//else
 
-	  if(p<5)
+	  if(m<2 && p<5)
 	    {	      
 	      printf("For m=%d, p=%d, tMin_all=%lf\n", m, p, tMin_all);
 	    }//if
@@ -161,7 +161,7 @@ int intersect_integ(void)
 	  rad_max = sqrt( POW2(xf) + POW2(yf) + POW2(zf) );
 	  PotDot[p-1] = gp[n].potDot_r;
 
-	  if(p<5)
+	  if(m<2 && p<5)
 	    {	      
 	      printf("Intersection at (x,y,z)=(%10.5lf,%10.5lf,%10.5lf) at cell n=%d\n", xf, yf, zf, n);
 	      printf("Distance traveled: %10.5lf and PotDot = %10.5lf\n", dist_trav[p-1], PotDot[p-1]);
@@ -171,13 +171,18 @@ int intersect_integ(void)
 	}
       while( rad_max <= ray[m].rad );
 
-      printf("For the last cell:\n");
-      printf("rad_max=%10.5lf\n", rad_max);
-      printf("Intersection at (x,y,z)=(%10.5lf,%10.5lf,%10.5lf) at cell n=%d\n", xf, yf, zf, n);
-      printf("Distance traveled: %10.5lf and PotDot = %10.5lf\n", dist_trav[p-1], PotDot[p-1]);
+      if(m<2)
+	{
+	  printf("For the last cell:\n");
+	  printf("rad_max=%10.5lf\n", rad_max);
+	  printf("Intersection at (x,y,z)=(%10.5lf,%10.5lf,%10.5lf) at cell n=%d\n", xf, yf, zf, n);
+	  printf("Distance traveled: %10.5lf and PotDot = %10.5lf\n", dist_trav[p-1], PotDot[p-1]);
+	}//if
       
       /*+++++ Computing integral +++++*/
-      printf("Computing integral for m=%d\n", m);
+      if(m<2)
+	printf("Computing integral for m=%d\n", m);
+      
       ray[m].ISW_temp = 0.0;
 	
       for(p=0; p<(GV.NCELLS/2); p++)
@@ -185,7 +190,8 @@ int intersect_integ(void)
 	  ray[m].ISW_temp += dist_trav[p] * PotDot[p] * GV.a_SF;
 	}//for p
 
-      printf("For ray m=%d, ISW temperature is %10.5lf\n", m, ( 2.0*GV.CMB_T0/(POW3(GV.c_SL)) ) * ray[m].ISW_temp);
+      if(m<2)
+	printf("For ray m=%d, ISW temperature is %10.5lf\n", m, ( 2.0*GV.CMB_T0/(POW3(GV.c_SL)) ) * ray[m].ISW_temp);
 
     }//for m
   
