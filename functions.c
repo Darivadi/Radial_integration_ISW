@@ -157,7 +157,31 @@ int intersect_integ(void)
 	  i = floor( ( (xf + 0.5*GV.BoxSize) / GV.BoxSize) * GV.NCELLS );
 	  j = floor( ( (yf + 0.5*GV.BoxSize) / GV.BoxSize) * GV.NCELLS );
 	  k = floor( ( (zf + 0.5*GV.BoxSize) / GV.BoxSize) * GV.NCELLS );
-	  n = INDEX_C_ORDER(i,j,k);	  
+	  n = INDEX_C_ORDER(i,j,k);
+
+	  if(i >= GV.NCELLS)
+	    {
+	      printf("Warning! i=%d >= GV.NCELLS=%d with p=%d\n", i, GV.NCELLS, p);
+	      return 1;
+	    }
+
+	  if(j >= GV.NCELLS)
+	    {
+	      printf("Warning! j=%d >= GV.NCELLS=%d with p=%d\n", j, GV.NCELLS, p);
+	      return 1;
+	    }
+
+	  if(k>= GV.NCELLS)
+	    {
+	      printf("Warning! k=%d >= GV.NCELLS=%d with p=%d\n", k, GV.NCELLS, p);
+	      return 1;
+	    }
+
+	  if(n >= GV.NTOTALCELLS)
+	    {
+	      printf("Warning! n=%d >= GV.NTOTALCELLS=%d with p=%d\n", i, GV.NTOTALCELLS, p);
+	      return 1;
+	    }
 	  
 	  /*+++++ Assigning distance and PotDot to compute Integral  +++++*/
 	  dist_trav[p-1] = sqrt( POW2(xf - x0) + POW2(yf - y0) + POW2(zf - z0) );
@@ -178,7 +202,7 @@ int intersect_integ(void)
 	    }//if
 	  p++;	  	  	  
 
-	} while( rad_max <= (ray[m].rad - 1e-1) );
+	} while( rad_max <= (ray[m].rad - 1e-10) );
 
       
       //if(m<2)
