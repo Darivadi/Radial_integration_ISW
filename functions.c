@@ -79,8 +79,8 @@ int intersect_integ(void)
 
       dist_trav = (double *) calloc((size_t) (GV.NCELLS/2), sizeof(double) );
       PotDot    = (double *) calloc((size_t) (GV.NCELLS/2), sizeof(double) );
-      
-      printf("Memory allocated\n");
+
+      //printf("Memory allocated\n");
       
       for(p=0; p<(GV.NCELLS/2); p++)
 	{
@@ -88,7 +88,7 @@ int intersect_integ(void)
 	  PotDot[p]    = 0.0;
 	}//for p
 
-      printf("Let's find the intersections\n");
+      //printf("Let's find the intersections\n");
 
       rad_max = 0.0;
       p = 1;
