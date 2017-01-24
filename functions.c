@@ -99,9 +99,9 @@ int intersect_integ(void)
 	  y0 = yf;
 	  z0 = zf;	 
 
-	  if(p>=GV.HalfNCells)
+	  if(p>GV.HalfNCells)
 	    {
-	      printf("Oops! p=%d >= HalfNCells=%d\n", p, GV.HalfNCells);
+	      printf("Oops! p=%d > HalfNCells=%d\n", p, GV.HalfNCells);
 	      return 1;
 	    }//if
 
