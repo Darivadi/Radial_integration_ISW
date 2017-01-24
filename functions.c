@@ -152,6 +152,29 @@ int intersect_integ(void)
 	  xf = ray[m].vec_ini[X] + tMin_all * (ray[m].vec_end[X] - ray[m].vec_ini[X]);
 	  yf = ray[m].vec_ini[Y] + tMin_all * (ray[m].vec_end[Y] - ray[m].vec_ini[Y]);
 	  zf = ray[m].vec_ini[Z] + tMin_all * (ray[m].vec_end[Z] - ray[m].vec_ini[Z]);
+
+	  
+	  if(xf > ray[m].vec_end[X])
+	    {
+	      printf("xf=%lf > ray[m].vec_end[X]=%lf for p=%d\n", xf, ray[m].vec_end[X], p);
+	      xf = ray[m].vec_end[X];
+	      //break;
+	    }//if
+
+	  if(yf > ray[m].vec_end[Y])
+	    {
+	      printf("yf=%lf > ray[m].vec_end[Y]=%lf for p=%d\n", yf, ray[m].vec_end[Y], p);
+	      yf = ray[m].vec_end[Y];
+	      //break;
+	    }
+
+	  if(zf > ray[m].vec_end[Z])
+	    {
+	      printf("zf=%lf > ray[m].vec_end[Z]=%lf for p=%d\n", zf, ray[m].vec_end[Z], p);
+	      zf = ray[m].vec_end[Z];
+	      //break;
+	    }
+	  
 	  	  
 	  /*+++++ Computing index of the corresponding cell +++++*/
 	  i = floor( ( (xf + 0.5*GV.BoxSize) / GV.BoxSize) * GV.NCELLS );
@@ -202,7 +225,7 @@ int intersect_integ(void)
 	    }//if
 	  p++;	  	  	  
 
-	} while( rad_max <= (ray[m].rad - 0.5) );
+	} while( rad_max <= (ray[m].rad - 1.0) );
 
       
       //if(m<2)
