@@ -154,21 +154,21 @@ int intersect_integ(void)
 	  zf = ray[m].vec_ini[Z] + tMin_all * (ray[m].vec_end[Z] - ray[m].vec_ini[Z]);
 
 	  
-	  if(xf > ray[m].vec_end[X])
+	  if(fabs(xf) > fabs(ray[m].vec_end[X]) )
 	    {
 	      printf("xf=%lf > ray[m].vec_end[X]=%lf for p=%d\n", xf, ray[m].vec_end[X], p);
 	      xf = ray[m].vec_end[X];
 	      //break;
 	    }//if
 
-	  if(yf > ray[m].vec_end[Y])
+	  if(fabs(yf) > fabs(ray[m].vec_end[Y]) )
 	    {
 	      printf("yf=%lf > ray[m].vec_end[Y]=%lf for p=%d\n", yf, ray[m].vec_end[Y], p);
 	      yf = ray[m].vec_end[Y];
 	      //break;
 	    }
 
-	  if(zf > ray[m].vec_end[Z])
+	  if(fabs(zf) > fabs(ray[m].vec_end[Z]) )
 	    {
 	      printf("zf=%lf > ray[m].vec_end[Z]=%lf for p=%d\n", zf, ray[m].vec_end[Z], p);
 	      zf = ray[m].vec_end[Z];
