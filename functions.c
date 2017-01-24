@@ -169,13 +169,12 @@ int intersect_integ(void)
 	    }//if	  	  
 	  */	  	  
 
-	  p++;	  
-	  
 	  if(p>GV.HalfNCells)
 	    {
 	      printf("Oops! p=%d > HalfNCells=%d\n", p, GV.HalfNCells);
 	      return 1;
 	    }//if
+	  p++;	  	  	  
 
 	} while( rad_max <= (ray[m].rad - 1e-2) );
       /*
