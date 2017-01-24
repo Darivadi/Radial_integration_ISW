@@ -164,10 +164,7 @@ int intersect_integ(void)
 	    {	      
 	      printf("Intersection at (x,y,z)=(%10.5lf,%10.5lf,%10.5lf) at cell n=%d\n", xf, yf, zf, n);
 	      printf("Distance traveled: %10.5lf and PotDot = %10.5lf\n", dist_trav[p-1], PotDot[p-1]);
-	    }//if
-	  
-	  if(m<5)
-	    printf("p goes until %d", p);
+	    }//if	  	  
 	  
 	  p++;	  
 	} while( rad_max <= ray[m].rad );
@@ -183,8 +180,7 @@ int intersect_integ(void)
       /*+++++ Computing integral +++++*/
       if(m<2)
 	printf("Computing integral for m=%d\n", m);
-      
-      ray[m].ISW_temp = 0.0;
+            ray[m].ISW_temp = 0.0;
 	
       for(p=0; p<(GV.NCELLS/2); p++)
 	{
