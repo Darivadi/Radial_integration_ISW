@@ -76,8 +76,8 @@ int intersect_integ(void)
   dist_trav = (double *) calloc((size_t) (GV.NCELLS/2), sizeof(double) );
   PotDot    = (double *) calloc((size_t) (GV.NCELLS/2), sizeof(double) );
 
-  printf("Size of dist_trav and PotDot: %d", sizeof(dist_trav)/sizeof(double) );
-  printf("Number of elements of dist_trav and PotDot: %d", sizeof(dist_trav) );
+  printf("Size of dist_trav and PotDot: %d\n", sizeof(dist_trav)/sizeof(double) );
+  printf("Number of elements of dist_trav and PotDot: %d\n", sizeof(dist_trav) );
 
   for(m=0; m<GV.NRays; m++)
     {      
