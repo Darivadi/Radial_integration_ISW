@@ -59,12 +59,12 @@ int main(int argc, char *argv[])
   printf("-----------------------------------------\n");
   read_binary();
 
-  GV.CellSize = GV.BoxSize/(1.0*GV.NCELLS);
-  GV.c_SL     = 299792.458; // km/s
-  GV.CMB_T0   = 2725480.0; // micro K
-  GV.CellStep = 1.0*GV.CellSize / 2.0;
-
-  printf("NCELLS=%d, CellSize=%lf, CellsStep=%lf\n", GV.NCELLS, GV.CellSize, GV.CellStep);
+  GV.CellSize   = GV.BoxSize/(1.0*GV.NCELLS);
+  GV.c_SL       = 299792.458; // km/s
+  GV.CMB_T0     = 2725480.0; // micro K
+  GV.HalfNCells = GV.NCELLS / 2;
+  
+  printf("NCELLS=%d, CellSize=%lf HalfNCells=%d\n", GV.NCELLS, GV.CellSize, GV.HalfNCells);
   printf("--------------------------------------------------------------------------------------\n");
 
   /*+++++ Generating rays +++++*/

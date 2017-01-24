@@ -73,17 +73,15 @@ int intersect_integ(void)
   printf("Let's find intersections");
   printf("--------------------------------------------------------------------------------------\n");
 
-  dist_trav = (double *) calloc((size_t) (GV.NCELLS/2), sizeof(double) );
-  PotDot    = (double *) calloc((size_t) (GV.NCELLS/2), sizeof(double) );
-
-  printf("Size of dist_trav and PotDot: %d\n", sizeof(dist_trav)/sizeof(double) );
-  printf("Number of elements of dist_trav and PotDot: %d\n", sizeof(dist_trav) );
-
+  
   for(m=0; m<GV.NRays; m++)
     {      
       rad_max = 0.0;
       x0 = y0 = z0 = xf = yf = zf = 0.0;      
-      
+  
+      dist_trav = (double *) calloc((size_t) (GV.HalfNCells), sizeof(double) );
+      PotDot    = (double *) calloc((size_t) (GV.HalfNCells), sizeof(double) );
+            
       for(p=0; p<(GV.NCELLS/2); p++)
 	{
 	  dist_trav[p] = 0.0;
@@ -198,10 +196,11 @@ int intersect_integ(void)
       if(m%1000==0)
 	printf("Ready for m=%d\n", m);
 
+      free(dist_trav);
+      free(PotDot);
+      
     }//for m
 
-  free(dist_trav);
-  free(PotDot);
   
   return 0;
 }//intersect_integ
