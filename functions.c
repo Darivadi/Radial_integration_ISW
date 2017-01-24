@@ -73,13 +73,13 @@ int intersect_integ(void)
   printf("Let's find intersections");
   printf("--------------------------------------------------------------------------------------\n");
 
+  dist_trav = (double *) calloc((size_t) (GV.NCELLS/2), sizeof(double) );
+  PotDot    = (double *) calloc((size_t) (GV.NCELLS/2), sizeof(double) );
+
   for(m=0; m<GV.NRays; m++)
     {      
       rad_max = 0.0;
-      x0 = y0 = z0 = xf = yf = zf = 0.0;
-
-      dist_trav = (double *) calloc((size_t) (GV.NCELLS/2), sizeof(double) );
-      PotDot    = (double *) calloc((size_t) (GV.NCELLS/2), sizeof(double) );
+      x0 = y0 = z0 = xf = yf = zf = 0.0;      
       
       for(p=0; p<(GV.NCELLS/2); p++)
 	{
@@ -191,6 +191,9 @@ int intersect_integ(void)
 	printf("For ray m=%d, ISW temperature is %10.5lf\n", m, ( 2.0*GV.CMB_T0/(POW3(GV.c_SL)) ) * ray[m].ISW_temp);
 
     }//for m
+
+  free(dist_trav);
+  free(PotDot);
   
   return 0;
 }//intersect_integ
