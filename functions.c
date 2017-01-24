@@ -98,13 +98,7 @@ int intersect_integ(void)
 	  x0 = xf;
 	  y0 = yf;
 	  z0 = zf;	 
-
-	  if(p>GV.HalfNCells)
-	    {
-	      printf("Oops! p=%d > HalfNCells=%d\n", p, GV.HalfNCells);
-	      return 1;
-	    }//if
-
+	  
 	  /*+++++ Computing parameter t in equation \vec[u] + t * \vec[v] = vec_end +++++*/
 	  if( (ray[m].vec_end[X] - ray[m].vec_ini[X]) > 0.0 || (ray[m].vec_end[X] - ray[m].vec_ini[X]) < 0.0 )
 	    tMax_x = fabs( (p*GV.CellSize - ray[m].vec_ini[X]) / (ray[m].vec_end[X] - ray[m].vec_ini[X]) );
@@ -176,6 +170,13 @@ int intersect_integ(void)
 	  */	  	  
 
 	  p++;	  
+	  
+	  if(p>GV.HalfNCells)
+	    {
+	      printf("Oops! p=%d > HalfNCells=%d\n", p, GV.HalfNCells);
+	      return 1;
+	    }//if
+
 	} while( rad_max <= (ray[m].rad - 1e-2) );
       /*
       if(m<2)
@@ -186,6 +187,10 @@ int intersect_integ(void)
 	  printf("Distance traveled: %10.5lf and PotDot = %10.5lf\n", dist_trav[p-1], PotDot[p-1]);
 	}//if
       */
+
+      if(m%100==0)
+	printf("Intersections ready for m=%d\n", m);      
+
       /*+++++ Computing integral +++++*/
       /*
       if(m<2)
@@ -193,16 +198,17 @@ int intersect_integ(void)
       */
       ray[m].ISW_temp = 0.0;
 	
-      for(p=0; p<(GV.NCELLS/2); p++)
+      for(p=0; p<(GV.HalfNCells); p++)
 	{
 	  ray[m].ISW_temp += dist_trav[p] * PotDot[p] * GV.a_SF;
 	}//for p
 
-      if(m<2)
-	printf("For ray m=%d, ISW temperature is %10.5lf\n", m, ( 2.0*GV.CMB_T0/(POW3(GV.c_SL)) ) * ray[m].ISW_temp);
       
       if(m%100==0)
-	printf("Ready for m=%d\n", m);      
+	{
+	  printf("For ray m=%d, ISW temperature is %10.5lf\n", m, ( 2.0*GV.CMB_T0/(POW3(GV.c_SL)) ) * ray[m].ISW_temp);
+	  printf("Integral ready for m=%d\n", m); 
+	}//if
       
     }//for m
 
