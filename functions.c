@@ -89,10 +89,12 @@ int intersect_integ(void)
 	{
 	  dist_trav[p] = 0.0;
 	  PotDot[p]    = 0.0;
-	}//for p
-      
+	}//for p            
+
       p = 1;
       
+      printf("Entering to the algorithm of parameter t of line for m=%d with p=%d\n", m, p);
+
       do 
 	{
 	  x0 = xf;
@@ -176,19 +178,20 @@ int intersect_integ(void)
 	    }//if
 	  p++;	  	  	  
 
-	} while( rad_max <= (ray[m].rad - 1e-2) );
-      /*
-      if(m<2)
+	} while( rad_max <= (ray[m].rad - 1e-1) );
+
+      
+      //if(m<2)
 	{
 	  printf("For the last cell:\n");
 	  printf("rad_max=%10.5lf\n", rad_max);
 	  printf("Intersection at (x,y,z)=(%10.5lf,%10.5lf,%10.5lf) at cell n=%d\n", xf, yf, zf, n);
 	  printf("Distance traveled: %10.5lf and PotDot = %10.5lf\n", dist_trav[p-1], PotDot[p-1]);
 	}//if
-      */
+      
 
       //if(m%100==0)
-	printf("Intersections ready for m=%d with p=%d\n", m, p);
+      printf("Intersections ready for m=%d with p=%d and rad_max=%lf\n", m, p, rad_max);
 
       /*+++++ Computing integral +++++*/
       /*
