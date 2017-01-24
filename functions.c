@@ -93,7 +93,7 @@ int intersect_integ(void)
 
       p = 1;
       
-      if(m%1000==0)
+      if(m%100000==0)
 	printf("Entering to the algorithm of parameter t of line for m=%d with p=%d\n", m, p);
 
       do 
@@ -119,7 +119,7 @@ int intersect_integ(void)
 	    tMax_z = ray[m].rad;
 
 	  
-	  if( m%1000==0 && p<2)
+	  if( m%100000==0 && p<2)
 	    {
 	      printf("-------------------------------------------------------------------------------\n");
 	      printf("tx, ty, tz = %10.5lf, %10.5lf, %10.5lf\n", tMax_x, tMax_y, tMax_z);
@@ -146,7 +146,7 @@ int intersect_integ(void)
 	    }//else
 	  
 	  
-	  if(m%1000==0 && p<2)
+	  if(m%100000==0 && p<2)
 	    {	      
 	      printf("For m=%d, p=%d, tMin_all=%lf\n", m, p, tMin_all);
 	    }//if
@@ -213,7 +213,7 @@ int intersect_integ(void)
 	  rad_max = sqrt( POW2(xf) + POW2(yf) + POW2(zf) );
 	  PotDot[p-1] = gp[n].potDot_r;
 	  
-	  if(m%1000==0 && p<2)
+	  if(m%100000==0 && p<2)
 	    {	      
 	      printf("Intersection at (x,y,z)=(%10.5lf,%10.5lf,%10.5lf) at cell n=%d\n", xf, yf, zf, n);
 	      printf("Distance traveled: %10.5lf and PotDot = %10.5lf\n", dist_trav[p-1], PotDot[p-1]);
@@ -230,7 +230,7 @@ int intersect_integ(void)
 	} while( rad_max <= (ray[m].rad - 1.0) );
 
       
-      if(m%1000==0)
+      if(m%100000==0)
 	{
 	  printf("For the last cell:\n");
 	  printf("rad_max=%10.5lf\n", rad_max);
@@ -239,12 +239,12 @@ int intersect_integ(void)
 	}//if
       
 
-      if(m%1000==0)
+      if(m%100000==0)
 	printf("Intersections ready for m=%d with p=%d and rad_max=%lf\n", m, p, rad_max);
       
       /*+++++ Computing integral +++++*/
       
-      if(m%1000==0)
+      if(m%100000==0)
 	printf("Computing integral for m=%d\n", m);
       
       ray[m].ISW_temp = 0.0;
@@ -255,7 +255,7 @@ int intersect_integ(void)
 	}//for p
 
       
-      if(m%1000==0)
+      if(m%100000==0)
 	{
 	  printf("For ray m=%d, ISW temperature is %10.5lf\n", m, ( 2.0*GV.CMB_T0/(POW3(GV.c_SL)) ) * ray[m].ISW_temp);
 	  printf("Integral ready for m=%d\n", m);
