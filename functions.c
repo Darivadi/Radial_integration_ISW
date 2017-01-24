@@ -70,7 +70,8 @@ int intersect_integ(void)
   double tMax_x, tMax_y, tMax_z, tMin_all; 
   double* dist_trav=NULL, *PotDot=NULL;
 
-
+  printf("Let's find intersections");
+  printf("--------------------------------------------------------------------------------------\n");
 
   for(m=0; m<GV.NRays; m++)
     {      
@@ -79,8 +80,6 @@ int intersect_integ(void)
 
       dist_trav = (double *) calloc((size_t) (GV.NCELLS/2), sizeof(double) );
       PotDot    = (double *) calloc((size_t) (GV.NCELLS/2), sizeof(double) );
-
-      //printf("Memory allocated\n");
       
       for(p=0; p<(GV.NCELLS/2); p++)
 	{
@@ -88,10 +87,10 @@ int intersect_integ(void)
 	  PotDot[p]    = 0.0;
 	}//for p
 
-      //printf("Let's find the intersections\n");
-
+      
       rad_max = 0.0;
       p = 1;
+      
       do 
 	{
 	  x0 = xf;
@@ -114,8 +113,8 @@ int intersect_integ(void)
 	  else
 	    tMax_z = ray[m].rad;
 
-
-	  if( m<2 && p<5 )
+	  
+	  if( m<2 && p<2 )
 	    {
 	      printf("-------------------------------------------------------------------------------\n");
 	      printf("tx, ty, tz = %10.5lf, %10.5lf, %10.5lf\n", tMax_x, tMax_y, tMax_z);
@@ -141,7 +140,7 @@ int intersect_integ(void)
 		}//if 1
 	    }//else
 
-	  if(m<2 && p<5)
+	  if(m<2 && p<2)
 	    {	      
 	      printf("For m=%d, p=%d, tMin_all=%lf\n", m, p, tMin_all);
 	    }//if
@@ -161,15 +160,17 @@ int intersect_integ(void)
 	  rad_max = sqrt( POW2(xf) + POW2(yf) + POW2(zf) );
 	  PotDot[p-1] = gp[n].potDot_r;
 
-	  if(m<2 && p<5)
+	  if(m<2 && p<2)
 	    {	      
 	      printf("Intersection at (x,y,z)=(%10.5lf,%10.5lf,%10.5lf) at cell n=%d\n", xf, yf, zf, n);
 	      printf("Distance traveled: %10.5lf and PotDot = %10.5lf\n", dist_trav[p-1], PotDot[p-1]);
 	    }//if
-
-	  p++;
-	}
-      while( rad_max <= ray[m].rad );
+	  
+	  if(m<5)
+	    printf("p goes until %d", p);
+	  
+	  p++;	  
+	} while( rad_max <= ray[m].rad );
 
       if(m<2)
 	{
