@@ -162,25 +162,25 @@ int intersect_integ(void)
 	  if(i >= GV.NCELLS)
 	    {
 	      printf("Warning! i=%d >= GV.NCELLS=%d with p=%d\n", i, GV.NCELLS, p);
-	      return 1;
+	      //return 1;
 	    }
 
 	  if(j >= GV.NCELLS)
 	    {
 	      printf("Warning! j=%d >= GV.NCELLS=%d with p=%d\n", j, GV.NCELLS, p);
-	      return 1;
+	      //return 1;
 	    }
 
 	  if(k>= GV.NCELLS)
 	    {
 	      printf("Warning! k=%d >= GV.NCELLS=%d with p=%d\n", k, GV.NCELLS, p);
-	      return 1;
+	      //return 1;
 	    }
 
 	  if(n >= GV.NTOTALCELLS)
 	    {
 	      printf("Warning! n=%d >= GV.NTOTALCELLS=%d with p=%d\n", i, GV.NTOTALCELLS, p);
-	      return 1;
+	      //return 1;
 	    }
 	  
 	  /*+++++ Assigning distance and PotDot to compute Integral  +++++*/
@@ -202,7 +202,7 @@ int intersect_integ(void)
 	    }//if
 	  p++;	  	  	  
 
-	} while( rad_max <= (ray[m].rad - 1e-10) );
+	} while( rad_max <= (ray[m].rad - 0.5) );
 
       
       //if(m<2)
