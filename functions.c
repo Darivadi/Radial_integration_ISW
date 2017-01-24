@@ -76,7 +76,8 @@ int intersect_integ(void)
   dist_trav = (double *) calloc((size_t) (GV.NCELLS/2), sizeof(double) );
   PotDot    = (double *) calloc((size_t) (GV.NCELLS/2), sizeof(double) );
 
-  printf("Size of dist_trav and PotDot: %d", sizeof(dist_trav)/sizeof(dist_trav[0]));
+  printf("Size of dist_trav and PotDot: %d", sizeof(dist_trav)/sizeof(double) );
+  printf("Number of elements of dist_trav and PotDot: %d", sizeof(dist_trav) );
 
   for(m=0; m<GV.NRays; m++)
     {      
@@ -194,7 +195,7 @@ int intersect_integ(void)
       if(m<2)
 	printf("For ray m=%d, ISW temperature is %10.5lf\n", m, ( 2.0*GV.CMB_T0/(POW3(GV.c_SL)) ) * ray[m].ISW_temp);
       
-      if(m%100==0)
+      if(m%1000==0)
 	printf("Ready for m=%d\n", m);
 
     }//for m
