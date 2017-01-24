@@ -167,5 +167,32 @@ int write_binary(void)
 
   fclose(outFile);
 
-
+  return 0;
 }//write_binary
+
+
+/**************************************************************************************************** 
+NAME: write_binary
+FUNCTION: writes file in binary format
+INPUT: None
+RETURN: 0 
+****************************************************************************************************/
+int write_ascii(void)
+{
+  FILE *outFile=NULL;
+  int m;
+  
+  outFile = fopen("./../../Processed_data/ISW_radial_app2.dat", "w");  
+
+  fprintf(outFile, "#Radius\t Theta\t Phi\t ISW_temp\n");
+
+  for(m=0; m<GV.NRays; m++)
+    {
+      fprintf(outFile, "%16.8lf %16.8lf %16.8lf %16.8lf\n", 
+	      ray[m].rad, ray[m].theta, ray[m].phi, ray[m].ISW_temp);
+    }//for m
+
+  fclose(outFile);
+
+  return 0;
+}//write_ascii
