@@ -77,7 +77,7 @@ int main(int argc, char *argv[])
   printf("--------------------------------------------------------------------------------------\n");
 
   /*+++++ Saving data file +++++*/
-  printf("Saving data file");
+  printf("Saving data file\n");
   printf("--------------------------------------------------------------------------------------\n");
   write_binary();
   write_ascii();

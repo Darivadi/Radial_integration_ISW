@@ -167,7 +167,7 @@ int intersect_integ(void)
 	    }//if	  	  
 	  
 	  p++;	  
-	} while( rad_max <= ray[m].rad );
+	} while( rad_max <= (ray[m].rad - 1e-5) );
 
       if(m<2)
 	{
