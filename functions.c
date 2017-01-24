@@ -70,7 +70,7 @@ int intersect_integ(void)
   double tMax_x, tMax_y, tMax_z, tMin_all; 
   double* dist_trav=NULL, *PotDot=NULL;
 
-  printf("Let's find intersections");
+  printf("Let's find intersections\n");
   printf("--------------------------------------------------------------------------------------\n");
 
   dist_trav = (double *) calloc((size_t) (GV.HalfNCells), sizeof(double) );
@@ -187,8 +187,8 @@ int intersect_integ(void)
 	}//if
       */
 
-      if(m%100==0)
-	printf("Intersections ready for m=%d\n", m);      
+      //if(m%100==0)
+	printf("Intersections ready for m=%d with p=%d\n", m, p);
 
       /*+++++ Computing integral +++++*/
       /*
@@ -203,10 +203,10 @@ int intersect_integ(void)
 	}//for p
 
       
-      if(m%100==0)
+      //if(m%100==0)
 	{
 	  printf("For ray m=%d, ISW temperature is %10.5lf\n", m, ( 2.0*GV.CMB_T0/(POW3(GV.c_SL)) ) * ray[m].ISW_temp);
-	  printf("Integral ready for m=%d\n", m); 
+	  printf("Integral ready for m=%d\n", m);
 	}//if
       
     }//for m
