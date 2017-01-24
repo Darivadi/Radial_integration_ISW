@@ -68,10 +68,10 @@ struct GlobalVariables
   int NTOTALCELLS;  // Total number of cell
   
 
-  double CellSize;  // Size of the cell
-  double ZERO;      // Zero for the computer
-  double CellStep; // Distance between one border of the cell and the grid point which is at the center of the cell.
-  int NRays;    // Number of radial rays to perform integration
+  double CellSize; // Size of the cell
+  double ZERO;     // Zero for the computer
+  int HalfNCells;  // Half of the number of cells per axis
+  int NRays;       // Number of radial rays to perform integration
 
 
   /*+++ Cosmological Parameters +++*/
