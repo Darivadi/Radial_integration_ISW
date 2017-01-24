@@ -67,9 +67,10 @@ int main(int argc, char *argv[])
   printf("NCELLS=%d, CellSize=%lf HalfNCells=%d\n", GV.NCELLS, GV.CellSize, GV.HalfNCells);
   printf("--------------------------------------------------------------------------------------\n");
 
-  /*+++++ Generating rays +++++*/
+  /*+++++ Generating rays +++++*/    
   ray = (struct radial_rays *) calloc((size_t) GV.NRays, sizeof(struct radial_rays));
-  
+  printf("Memory allocated for NRays=%d. Let's generate random coordinates for rays\n", GV.NRays);
+  printf("--------------------------------------------------------------------------------------\n");
   rand_rays_coordinates();
    
   /*+++++ Finding intersections and integrating +++++*/

@@ -38,7 +38,7 @@ int rand_rays_coordinates(void)
       ray[m].vec_end[Y] = ray[m].rad * sin(ray[m].theta) * sin(ray[m].phi);
       ray[m].vec_end[Z] = ray[m].rad * cos(ray[m].theta);
       
-      if(m<2)
+      if(m<2 || m==GV.NRays-1)
 	{
 	  printf("Ray m=%d generated at (theta, phi) = (%10.5lf, %10.5lf)\n", 
 		 m, ray[m].theta, ray[m].phi);
@@ -73,23 +73,24 @@ int intersect_integ(void)
   printf("Let's find intersections");
   printf("--------------------------------------------------------------------------------------\n");
 
+  dist_trav = (double *) calloc((size_t) (GV.HalfNCells), sizeof(double) );
+  PotDot    = (double *) calloc((size_t) (GV.HalfNCells), sizeof(double) );
+
+  printf("Memory allocated for dist_trav and PotDot arrays\n");
+  printf("--------------------------------------------------------------------------------------\n");
+  
   
   for(m=0; m<GV.NRays; m++)
     {      
       rad_max = 0.0;
       x0 = y0 = z0 = xf = yf = zf = 0.0;      
-  
-      dist_trav = (double *) calloc((size_t) (GV.HalfNCells), sizeof(double) );
-      PotDot    = (double *) calloc((size_t) (GV.HalfNCells), sizeof(double) );
-            
-      for(p=0; p<(GV.NCELLS/2); p++)
+              
+      for(p=0; p<GV.HalfNCells; p++)
 	{
 	  dist_trav[p] = 0.0;
 	  PotDot[p]    = 0.0;
 	}//for p
-
       
-      rad_max = 0.0;
       p = 1;
       
       do 
@@ -97,6 +98,12 @@ int intersect_integ(void)
 	  x0 = xf;
 	  y0 = yf;
 	  z0 = zf;	 
+
+	  if(p>=GV.HalfNCells)
+	    {
+	      printf("Oops! p=%d >= HalfNCells=%d\n", p, GV.HalfNCells);
+	      return 1;
+	    }//if
 
 	  /*+++++ Computing parameter t in equation \vec[u] + t * \vec[v] = vec_end +++++*/
 	  if( (ray[m].vec_end[X] - ray[m].vec_ini[X]) > 0.0 || (ray[m].vec_end[X] - ray[m].vec_ini[X]) < 0.0 )
@@ -166,9 +173,10 @@ int intersect_integ(void)
 	      printf("Intersection at (x,y,z)=(%10.5lf,%10.5lf,%10.5lf) at cell n=%d\n", xf, yf, zf, n);
 	      printf("Distance traveled: %10.5lf and PotDot = %10.5lf\n", dist_trav[p-1], PotDot[p-1]);
 	    }//if	  	  
-	  */
+	  */	  	  
+
 	  p++;	  
-	} while( rad_max <= (ray[m].rad - 1e-5) );
+	} while( rad_max <= (ray[m].rad - 1e-2) );
       /*
       if(m<2)
 	{
@@ -193,14 +201,13 @@ int intersect_integ(void)
       if(m<2)
 	printf("For ray m=%d, ISW temperature is %10.5lf\n", m, ( 2.0*GV.CMB_T0/(POW3(GV.c_SL)) ) * ray[m].ISW_temp);
       
-      if(m%1000==0)
-	printf("Ready for m=%d\n", m);
-
-      free(dist_trav);
-      free(PotDot);
+      if(m%100==0)
+	printf("Ready for m=%d\n", m);      
       
     }//for m
 
+  free(dist_trav);
+  free(PotDot);
   
   return 0;
 }//intersect_integ
