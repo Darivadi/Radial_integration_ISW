@@ -227,7 +227,8 @@ int intersect_integ(void)
 	    }//if
 	  p++;	  	  	  
 
-	} while( rad_max <= (ray[m].rad - 1.0e-10) );
+	} //while( rad_max <= (ray[m].rad - 1.0e-10) );
+      while( fabs(ray[m].rad - rad_max) >  1.0e-10 );
 
       
       if(m%100000==0)
