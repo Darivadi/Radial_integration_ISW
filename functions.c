@@ -32,11 +32,22 @@ int rand_rays_coordinates(void)
       ray[m].vec_ini[X] = 0.0;
       ray[m].vec_ini[Y] = 0.0;
       ray[m].vec_ini[Z] = 0.0;
+
+#ifdef FROM90MPC
+      ray[m].vec_ini[X] = 90.0;
+      ray[m].vec_ini[Y] = 90.0;
+      ray[m].vec_ini[Z] = 90.0;
+#endif 
+
       
       /*----- Final position's vector -----*/
       ray[m].vec_end[X] = ray[m].rad * sin(ray[m].theta) * cos(ray[m].phi);
       ray[m].vec_end[Y] = ray[m].rad * sin(ray[m].theta) * sin(ray[m].phi);
       ray[m].vec_end[Z] = ray[m].rad * cos(ray[m].theta);
+
+#ifdef FROM90MPC
+      ray[m].rad -= 90.0;
+#endif
       
       if(m<2 || m==GV.NRays-1)
 	{
