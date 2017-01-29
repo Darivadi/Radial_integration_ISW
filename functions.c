@@ -33,21 +33,11 @@ int rand_rays_coordinates(void)
       ray[m].vec_ini[Y] = 0.0;
       ray[m].vec_ini[Z] = 0.0;
 
-#ifdef FROM90MPC
-      ray[m].vec_ini[X] = 90.0;
-      ray[m].vec_ini[Y] = 90.0;
-      ray[m].vec_ini[Z] = 90.0;
-#endif 
-
       
       /*----- Final position's vector -----*/
       ray[m].vec_end[X] = ray[m].rad * sin(ray[m].theta) * cos(ray[m].phi);
       ray[m].vec_end[Y] = ray[m].rad * sin(ray[m].theta) * sin(ray[m].phi);
       ray[m].vec_end[Z] = ray[m].rad * cos(ray[m].theta);
-
-#ifdef FROM90MPC
-      ray[m].rad -= 90.0;
-#endif
       
       if(m<2 || m==GV.NRays-1)
 	{
@@ -219,9 +209,21 @@ int intersect_integ(void)
 	      //return 1;
 	    }
 	  
+	  
 	  /*+++++ Assigning distance and PotDot to compute Integral  +++++*/
-	  dist_trav[p-1] = sqrt( POW2(xf - x0) + POW2(yf - y0) + POW2(zf - z0) );
 	  rad_max = sqrt( POW2(xf) + POW2(yf) + POW2(zf) );
+
+#ifdef FROM90MPC
+	  if(rad_max < 90.0)
+	    {
+	      dist_trav[p-1] = 0.0;
+	      PotDot[p-1]    = 0.0;
+	      p++;
+	      continue;
+	    }//if
+#endif
+
+	  dist_trav[p-1] = sqrt( POW2(xf - x0) + POW2(yf - y0) + POW2(zf - z0) );	  
 	  PotDot[p-1] = gp[n].potDot_r;
 	  
 	  if(m%100000==0 && p<2)
