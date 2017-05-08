@@ -4,7 +4,7 @@
 #+++++++++++++++++++++++++++++++++++++++
 #Number of cells per axis is N
 #Total number of cells is N^3
-N = 1024
+N = 512
 #Path of data file
 FILENAME = /home/dvalencia/MDPL_Simulation/Processed_data/PotDot.bin
 #Number of radial rays

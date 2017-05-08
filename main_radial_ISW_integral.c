@@ -81,7 +81,7 @@ int main(int argc, char *argv[])
   printf("Saving data file\n");
   printf("--------------------------------------------------------------------------------------\n");
   write_binary();
-  write_ascii();
+  //write_ascii();
   
   
   printf("Code finished successfully\n");
